@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "500586440224",
+    "firebase_url": "https://tab-layout-77c20.firebaseio.com",
+    "project_id": "tab-layout-77c20",
+    "storage_bucket": "tab-layout-77c20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500586440224:android:fc2f036f9f4d3318bc7e45",
+        "android_client_info": {
+          "package_name": "com.example.userpagetablayout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500586440224-jqcrtjoi50ccd85v5aeb0kko7sah78jd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaKGMWtwPbnvkUxI-u7HQ8vjLPICFolgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500586440224-jqcrtjoi50ccd85v5aeb0kko7sah78jd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

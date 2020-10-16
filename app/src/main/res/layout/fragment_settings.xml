@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.Settings">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/selected_photo_imageview"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settingstext"
+                tools:src="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/button_addImage_settings"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/circular_button"
+                android:text="CHANGE PHOTO"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selected_photo_imageview" />
+
+            <EditText
+                android:id="@+id/Edittext_username_settings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Change Username"
+                android:inputType="textPersonName"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_addImage_settings" />
+
+            <EditText
+                android:id="@+id/Edittext_email_settings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Change Email"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/Edittext_username_settings"
+                app:layout_constraintStart_toStartOf="@+id/Edittext_username_settings"
+                app:layout_constraintTop_toBottomOf="@+id/Edittext_username_settings" />
+
+            <EditText
+                android:id="@+id/password_settings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Change Password"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/Edittext_email_settings"
+                app:layout_constraintStart_toStartOf="@+id/Edittext_email_settings"
+                app:layout_constraintTop_toBottomOf="@+id/Edittext_email_settings" />
+
+            <EditText
+                android:id="@+id/Currentemail_settings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Enter Current Email"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/password_settings"
+                app:layout_constraintStart_toStartOf="@+id/password_settings"
+                app:layout_constraintTop_toBottomOf="@+id/infotextView" />
+
+            <EditText
+                android:id="@+id/Currentpassword_settings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Enter Current Password"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/Currentemail_settings"
+                app:layout_constraintStart_toStartOf="@+id/Currentemail_settings"
+                app:layout_constraintTop_toBottomOf="@+id/Currentemail_settings" />
+
+            <Button
+                android:id="@+id/button_saveUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/green_button"
+                android:text="Save Changes"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/password_settings"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/password_settings"
+                app:layout_constraintTop_toBottomOf="@+id/Currentpassword_settings" />
+
+            <TextView
+                android:id="@+id/settingstext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Here you can edit your profile settings"
+                android:textColor="#424242"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/button_saveUser"
+                app:layout_constraintStart_toStartOf="@+id/button_saveUser"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/infotextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Please enter your current info"
+                app:layout_constraintEnd_toEndOf="@+id/password_settings"
+                app:layout_constraintStart_toStartOf="@+id/password_settings"
+                app:layout_constraintTop_toBottomOf="@+id/password_settings" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
