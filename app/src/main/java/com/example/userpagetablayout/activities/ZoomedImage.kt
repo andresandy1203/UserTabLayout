@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
+import com.example.userpagetablayout.databinding.ActivityMusicPlayBinding
+import com.example.userpagetablayout.databinding.ActivityZoomedImageBinding
 import com.example.userpagetablayout.fragments.HomeFragment
 import com.example.userpagetablayout.fragments.viewpagers.PhotosFragment
 import com.example.userpagetablayout.models.GalleryImage
@@ -21,17 +24,27 @@ class ZoomedImage : AppCompatActivity() {
     var galleryImage: GalleryImage? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_zoomed_image)
+
+        //Data binding
+        val binding = DataBindingUtil.setContentView<ActivityZoomedImageBinding>(
+            this,
+            R.layout.activity_zoomed_image
+        )
+
+        //Get Image data from previous activity
         galleryImage = intent.getParcelableExtra(PhotosFragment.IMAGE_LINK_KEY)
 
-        Glide.with(this).load(galleryImage?.imageUrl).into(imageViewZoomed)
+        //Load the image
+        Glide.with(this).load(galleryImage?.imageUrl).into(binding.imageViewZoomed)
 
-        imageView_erase_button.setOnClickListener {
+        //Set click listener
+        binding.imageViewEraseButton.setOnClickListener {
             removeImage()
         }
-        //Picasso.get().load(galleryImage?.imageUrl).into(imageViewZoomed)
+
     }
 
+    //Remove the image from Firebase Database
     fun removeImage(){
         val uid = FirebaseAuth.getInstance().uid
         val ref=FirebaseDatabase.getInstance().getReference("imageList/$uid/${galleryImage?.id}")

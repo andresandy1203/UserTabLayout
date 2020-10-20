@@ -9,7 +9,10 @@ import android.widget.Button
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.DataBindingUtil
 import com.example.userpagetablayout.R
+import com.example.userpagetablayout.databinding.ActivityAddNewSongBinding
+import com.example.userpagetablayout.databinding.ActivityVideoPlayBinding
 import com.example.userpagetablayout.fragments.viewpagers.MusicFragment
 import com.example.userpagetablayout.fragments.viewpagers.VideosFragment
 import com.example.userpagetablayout.models.Song
@@ -26,28 +29,27 @@ import kotlinx.android.synthetic.main.activity_video_play.*
 class VideoPlayActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
 
     var video: Video? = null
+    var binding: ActivityVideoPlayBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Data Binding
+        @Suppress("UNUSED_VARIABLE")
+        binding = DataBindingUtil.setContentView<ActivityVideoPlayBinding>(
+            this,
+            R.layout.activity_video_play
+        )
 
-        setContentView(R.layout.activity_video_play)
-        YoutubeVideoView.initialize("AIzaSyARKh8YVeVLW_rDPwdskyBq6EsAgsg76TY", this)
+        //Initialize API
+        binding?.YoutubeVideoView?.initialize("AIzaSyARKh8YVeVLW_rDPwdskyBq6EsAgsg76TY", this)
 
-
+        //Get video data from previous activity
         video = intent.getParcelableExtra(VideosFragment.VIDEO_LINK_KEY)
-
-
-//        webview_musiclink.settings.javaScriptEnabled = true
-//        webview_musiclink.settings.loadWithOverviewMode = true
-//        webview_musiclink.settings.useWideViewPort = true
-//
-//        if (video != null) {
-//            webview_musiclink.loadUrl(video!!.videoUrl)
-//        }
-
 
     }
 
+    //Initialize Youtube Play View
     override fun onInitializationSuccess(
         provider: YouTubePlayer.Provider?,
         youtubePlayer: YouTubePlayer?,
@@ -55,14 +57,31 @@ class VideoPlayActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedList
     ) {
         youtubePlayer?.setPlayerStateChangeListener(playerStateChangeListener)
         youtubePlayer?.setPlaybackEventListener(playbackEventListener)
-        if(!wasRestored){
+        if (!wasRestored) {
             youtubePlayer?.loadVideo(video!!.videoUrl)
         }
     }
 
-    private val playerStateChangeListener=object:YouTubePlayer.PlayerStateChangeListener{
+    //Listen for error on initialization
+    override fun onInitializationFailure(
+        provider: YouTubePlayer.Provider?,
+        youTubeInitializationResult: YouTubeInitializationResult?
+    ) {
+        val REQUEST_CODE = 0
+
+        if (youTubeInitializationResult?.isUserRecoverableError == true) {
+            youTubeInitializationResult.getErrorDialog(this, REQUEST_CODE).show()
+        } else {
+            val errorMessage =
+                "There was an error initializing the YoutubePlayer ($youTubeInitializationResult)"
+            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    //Control the actions taken with the Youtube Play View
+    private val playerStateChangeListener = object : YouTubePlayer.PlayerStateChangeListener {
         override fun onAdStarted() {
-            Toast.makeText(this@VideoPlayActivity,"Ad playing", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@VideoPlayActivity, "Ad playing", Toast.LENGTH_SHORT).show()
         }
 
         override fun onLoading() {
@@ -86,7 +105,7 @@ class VideoPlayActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedList
         }
     }
 
-    private val playbackEventListener=object:YouTubePlayer.PlaybackEventListener{
+    private val playbackEventListener = object : YouTubePlayer.PlaybackEventListener {
         override fun onSeekTo(p0: Int) {
 
         }
@@ -100,25 +119,11 @@ class VideoPlayActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedList
         }
 
         override fun onStopped() {
-           // Toast.makeText(this@VideoPlayActivity, "Video stopped", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(this@VideoPlayActivity, "Video stopped", Toast.LENGTH_SHORT).show()
         }
 
         override fun onPaused() {
             Toast.makeText(this@VideoPlayActivity, "Video has pasued", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun onInitializationFailure(
-        provider: YouTubePlayer.Provider?,
-        youTubeInitializationResult:YouTubeInitializationResult?
-    ) {
-        val REQUEST_CODE = 0
-
-        if (youTubeInitializationResult?.isUserRecoverableError == true) {
-            youTubeInitializationResult.getErrorDialog(this, REQUEST_CODE).show()
-        } else {
-            val errorMessage = "There was an error initializing the YoutubePlayer ($youTubeInitializationResult)"
-            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
         }
     }
 
