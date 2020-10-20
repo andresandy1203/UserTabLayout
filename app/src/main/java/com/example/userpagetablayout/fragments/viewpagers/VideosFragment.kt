@@ -29,12 +29,10 @@ class VideosFragment : Fragment() {
         val VIDEO_LINK_KEY = "VIDEO_LINK"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
+    //Set up adapter
     val adapter = GroupAdapter<GroupieViewHolder>()
+    //HashMap for the recycler view of video images
+    val videosMap=HashMap<String, Video>()
 
     @SuppressLint()
     override fun onCreateView(
@@ -42,6 +40,7 @@ class VideosFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
+        //Data Binding
         val binding = DataBindingUtil.inflate<FragmentVideosBinding>(
             inflater,
             R.layout.fragment_videos,
@@ -49,10 +48,15 @@ class VideosFragment : Fragment() {
             false
         )
 
+        //Get the video images data
         listenForImages()
+
+        //set up recycler view's adapter
         binding.RecyclerviewVideogalleryGridimages.adapter = adapter
 
+        //Click long listener for the recycler view items
         adapter.setOnItemLongClickListener { item, view ->
+            //Create the Popup menu with the option to delete the video
             val videoItem =item as VideoGalleryItem
             val popupMenu=PopupMenu(activity,view)
             popupMenu.inflate(R.menu.deletemenu)
@@ -65,7 +69,9 @@ class VideosFragment : Fragment() {
             popupMenu.show()
             true  }
 
+        //Click listener for the recycler view items
         adapter.setOnItemClickListener { item, view ->
+            //Sending the data of the selected video to the new activity
             val videoItem = item as VideoGalleryItem
             val intent = Intent(activity, VideoPlayActivity::class.java)
             intent.putExtra(VIDEO_LINK_KEY, videoItem?.videoItem)
@@ -73,6 +79,7 @@ class VideosFragment : Fragment() {
 
         }
 
+        //Manage the grid layout
         val manager = GridLayoutManager(activity, 3)
         binding.RecyclerviewVideogalleryGridimages.layoutManager = manager
 
@@ -88,8 +95,6 @@ class VideosFragment : Fragment() {
         videosMap.values.remove(video)
         refreshRecyclerViewVideo()
     }
-
-    val videosMap=HashMap<String, Video>()
 
     private fun refreshRecyclerViewVideo(){
         adapter.clear()

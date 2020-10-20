@@ -12,15 +12,12 @@ class VideoGalleryItem(val videoItem: Video) : Item<GroupieViewHolder>() {
         val TAG = "VideogalleryItem"
     }
 
-
+    //Bind the View Holder to the Video Gallery Item UI
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
         if(videoItem!=null){
-            //Picasso.get().load(videoItem.imageUrl).into(viewHolder.itemView.imageview_item)
             Glide.with(viewHolder.itemView.context).load(videoItem.imageUrl).into(viewHolder.itemView.imageview_item)
         }
-
-
 
     }
 

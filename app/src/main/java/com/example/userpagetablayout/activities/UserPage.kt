@@ -36,7 +36,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class UserPage : AppCompatActivity() {
 
-
     companion object {
         var currentUser: User?=null
         val TAG = "UserPage"
@@ -45,41 +44,36 @@ class UserPage : AppCompatActivity() {
     }
     var navController:NavController?=null
 
-    //val loggedInUser=User(uid.toString(),uid?.displayName.toString(),uid?.photoUrl.toString())
     private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
-        //supportActionBar?.title="USER PAGE"
 
-        //val navController=this.findNavController(R.id.myNavHostFragment)
-        //NavigationUI.setupActionBarWithNavController(this,navController)
         super.onCreate(savedInstanceState)
-        fetchCurrentUser()
+
         verifyUserIsLoggedIn()
 
+        //DataBinding
         @Suppress("UNUSED_VARIABLE")
          binding = DataBindingUtil.setContentView<ActivityUserPageBinding>(
             this,
             R.layout.activity_user_page
         )
 
-        drawerLayout = binding!!.drawerLayout
-         navController = this.findNavController(R.id.myNavHostFragment)
-        //NavigationUI.setupActionBarWithNavController(this,navController,drawerLayout)
         supportActionBar?.title= Bartitle
+
+        //Enable navigation between fragments
+        drawerLayout = binding!!.drawerLayout
+        navController = this.findNavController(R.id.myNavHostFragment)
         NavigationUI.setupWithNavController(binding!!.navView, navController!!)
-
-
-        //fillUI()
 
     }
 
-
-
+    //Use navigation controller
     override fun onSupportNavigateUp(): Boolean {
          val navController = this.findNavController(R.id.myNavHostFragment)
         return NavigationUI.navigateUp(navController!!, drawerLayout)
     }
 
+    //If user is not logged in,return to the Register Activity
     private fun verifyUserIsLoggedIn() {
         val uid = Firebase.auth.currentUser
 
@@ -90,42 +84,5 @@ class UserPage : AppCompatActivity() {
         }
 
     }
-
-//    fun setActionBarTitle(title:String){
-//        supportActionBar?.title="$title"
-//    }
-
-    private fun fetchCurrentUser(){
-        val uid = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        ref.addListenerForSingleValueEvent(object: ValueEventListener{
-            override fun onDataChange(p0: DataSnapshot) {
-                currentUser=p0.getValue(User::class.java)
-                Log.d("LatesMessages", "Current user ${currentUser?.username}")
-            }
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
-    }
-
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item?.itemId){
-//            R.id.menu_settings->{
-//                val navController = this.findNavController(R.id.myNavHostFragment)
-//                navController.navigate(R.id.action_homeFragment_to_settings)
-//                //this.findNavController().navigate(R.id.action_homeFragment_to_settings)
-//
-//            }
-//
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-//
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.navmenu,menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
 
 }
