@@ -1,45 +1,48 @@
-package com.example.userpagetablayout.activities
+package com.example.userpagetablayout.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.databinding.ActivityAddNewSongBinding
+import com.example.userpagetablayout.activities.UserPage
+import com.example.userpagetablayout.databinding.FragmentAddNewSongBinding
 import com.example.userpagetablayout.models.Song
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_add_new_song.*
-import kotlinx.android.synthetic.main.activity_register.selected_photo_imageview
 import java.util.*
 
-class add_new_song : AppCompatActivity() {
+class add_new_song : Fragment() {
 
     companion object {
-        var binding: ActivityAddNewSongBinding? = null
+        var binding: FragmentAddNewSongBinding? = null
     }
     var selectedPhotoUri: Uri? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        //DataBinding
-        @Suppress("UNUSED_VARIABLE")
-        binding = DataBindingUtil.setContentView<ActivityAddNewSongBinding>(
-            this,
-            R.layout.activity_add_new_song
+    @Suppress("UNUSED_VARIABLE")
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View?{
+        binding = DataBindingUtil.inflate<FragmentAddNewSongBinding>(
+            inflater,
+            R.layout.fragment_add_new_song,
+            container,
+            false
         )
-
         //Add click listener to register button to add a new song
         binding?.buttonRegisterSong?.setOnClickListener {
             performAddSong()
@@ -55,8 +58,9 @@ class add_new_song : AppCompatActivity() {
         //Set key listeners
         binding?.EdittextSongnameRegister?.setOnKeyListener { view, keyCode, _ -> handleKeyEvent(view, keyCode) }
         binding?.EdittextArtistNameRegister?.setOnKeyListener { view, keyCode, _ -> handleKeyEvent(view, keyCode) }
-
+        return binding?.root
     }
+
 
     //Get the bitMap from the data of the selected image from the ACTION_PICK intent
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -65,7 +69,7 @@ class add_new_song : AppCompatActivity() {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             selectedPhotoUri = data.data
 
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+            val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, selectedPhotoUri)
 
             //Change the displayed image to the selected image's bitmap
             binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
@@ -79,7 +83,7 @@ class add_new_song : AppCompatActivity() {
     private fun handleKeyEvent(view: View, keyCode: Int): Boolean {
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
             val inputMethodManager =
-                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
             return true
         }
@@ -91,7 +95,7 @@ class add_new_song : AppCompatActivity() {
         if (selectedPhotoUri != null) {
             uploadImagetoFirebase()
         } else {
-            Toast.makeText(this, "Please upload an image", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Please upload an image", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -128,9 +132,9 @@ class add_new_song : AppCompatActivity() {
 
         //Update the database and go back to the User Page activity
         ref.setValue(song).addOnSuccessListener {
-            Toast.makeText(this, "Song Saved", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Song Saved", Toast.LENGTH_SHORT).show()
             Log.d("New song", "Saved song")
-            val intent = Intent(this, UserPage::class.java)
+            val intent = Intent(activity, UserPage::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
 

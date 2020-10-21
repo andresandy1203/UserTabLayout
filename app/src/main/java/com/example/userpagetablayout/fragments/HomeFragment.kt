@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.activities.add_new_song
 import com.example.userpagetablayout.databinding.ActivityZoomedImageBinding
 import com.example.userpagetablayout.databinding.FragmentHomeBinding
 import com.example.userpagetablayout.fragments.adapters.ViewPagerAdapter
@@ -60,8 +59,8 @@ class HomeFragment : Fragment() {
 
             when (position) {
                 0 -> {
-                    val intent = Intent(activity, add_new_song::class.java)
-                    startActivity(intent)
+                    val navController = activity?.findNavController(R.id.myNavHostFragment)
+                    navController?.navigate(R.id.action_homeFragment_to_add_new_song)
 
                     Log.d(TAG, "we at music")
                 }

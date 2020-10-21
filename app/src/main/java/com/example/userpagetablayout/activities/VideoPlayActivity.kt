@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.databinding.ActivityAddNewSongBinding
 import com.example.userpagetablayout.databinding.ActivityVideoPlayBinding
 import com.example.userpagetablayout.fragments.viewpagers.MusicFragment
 import com.example.userpagetablayout.fragments.viewpagers.VideosFragment

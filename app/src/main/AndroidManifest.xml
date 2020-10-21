@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.EditSongDetails"></activity>
         <activity android:name=".activities.Settings" />
-        <activity android:name=".activities.add_new_song" />
+        <activity android:name=".fragments.add_new_song" />
         <activity android:name=".activities.VideoPlayActivity" />
         <activity android:name=".activities.ZoomedImage" />
         <activity android:name=".activities.MusicPlay" />

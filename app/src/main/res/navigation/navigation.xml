@@ -14,6 +14,9 @@
             android:id="@+id/action_homeFragment_to_settings"
             app:destination="@id/settings"
             app:enterAnim="@anim/nav_default_pop_enter_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_add_new_song"
+            app:destination="@id/add_new_song" />
     </fragment>
     <fragment
         android:id="@+id/settings"
@@ -25,4 +28,8 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@android:anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/add_new_song"
+        android:name="com.example.userpagetablayout.fragments.add_new_song"
+        android:label="add_new_song" />
 </navigation>
