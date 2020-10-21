@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class ViewPagerAdapter(fragment: Fragment) :
     FragmentStateAdapter(fragment) {
 
-
+    //Initiate the Fragment List with its respective title list
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()
     override fun getItemCount(): Int {

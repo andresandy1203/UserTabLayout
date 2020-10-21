@@ -183,7 +183,11 @@ class Settings : Fragment() {
                     Toast.makeText(activity, "Email was updated", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Log.d(TAG, "error on email update ${it.message}")
-                    Toast.makeText(activity, "error on email update ${it.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        activity,
+                        "error on email update ${it.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
                 refCurrentUser.updatePassword(EditTextPassword.trim()).addOnCompleteListener {
@@ -192,7 +196,11 @@ class Settings : Fragment() {
                     Toast.makeText(activity, "Password was updated", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Log.d(TAG, "error on password update ${it.message}")
-                    Toast.makeText(activity, "error on password update ${it.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        activity,
+                        "error on password update ${it.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
                 //sign in again
 
@@ -218,7 +226,11 @@ class Settings : Fragment() {
             }?.addOnFailureListener {
                 // Toast.makeText(context,"${it.message}",Toast.LENGTH_SHORT).show()
                 Log.d("Settings", "error on reauthenticate ${it.message}")
-                Toast.makeText(activity, "Please enter correct email and password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    "Please enter correct email and password",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         } else if (EditTextEmail.isNotEmpty() && EditTextPassword.isEmpty()) {
@@ -250,7 +262,11 @@ class Settings : Fragment() {
                     Toast.makeText(activity, "Email was updated", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Log.d(TAG, "error on email update ${it.message}")
-                    Toast.makeText(activity, "error on email update ${it.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        activity,
+                        "error on email update ${it.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
                 Log.d(TAG, "the password is: $EditTextPassword, the email is $EditTextEmail")
@@ -277,7 +293,11 @@ class Settings : Fragment() {
                 //Toast.makeText(activity, "Succesfully updated the email",Toast.LENGTH_SHORT).show()
             }?.addOnFailureListener {
                 // Toast.makeText(context,"${it.message}",Toast.LENGTH_SHORT).show()
-                Toast.makeText(activity, "Please enter correct email and password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    "Please enter correct email and password",
+                    Toast.LENGTH_SHORT
+                ).show()
                 Log.d("Settings", "error on reauthenticate ${it.message}")
             }
 
@@ -313,7 +333,11 @@ class Settings : Fragment() {
                     Toast.makeText(activity, "Password was updated", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "new passwors is $EditTextPassword")
                 }.addOnFailureListener {
-                    Toast.makeText(activity, "error on password update ${it.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        activity,
+                        "error on password update ${it.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                     Log.d(TAG, "error on password update ${it.message}")
                 }
 
@@ -340,7 +364,11 @@ class Settings : Fragment() {
                 //Toast.makeText(activity, "Succesfully updated the email",Toast.LENGTH_SHORT).show()
             }?.addOnFailureListener {
                 // Toast.makeText(context,"${it.message}",Toast.LENGTH_SHORT).show()
-                Toast.makeText(activity, "Please enter correct email and password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    "Please enter correct email and password",
+                    Toast.LENGTH_SHORT
+                ).show()
                 Log.d("Settings", "error on reauthenticate ${it.message}")
             }
 

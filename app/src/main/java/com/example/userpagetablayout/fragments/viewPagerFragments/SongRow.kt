@@ -16,7 +16,7 @@ class SongRow(val songItem: Song) : Item<GroupieViewHolder>() {
 
     }
 
-
+    //Bind the View Holder to the Song Row UI
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.artistname_textview.text = songItem.songArtist
         viewHolder.itemView.songname_textView.text = songItem.songName

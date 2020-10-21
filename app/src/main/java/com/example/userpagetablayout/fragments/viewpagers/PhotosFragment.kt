@@ -36,12 +36,10 @@ class PhotosFragment : Fragment() {
         val IMAGE_LINK_KEY = "IMAGE_LINK"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
+    //Set up adapter
     val adapter = GroupAdapter<GroupieViewHolder>()
+    //HashMap for the recycler view of images
+    val imageMap=HashMap<String, GalleryImage>()
 
     @SuppressLint()
     override fun onCreateView(
@@ -49,6 +47,7 @@ class PhotosFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
+        //Data Binding
         val binding = DataBindingUtil.inflate<FragmentPhotosBinding>(
             inflater,
             R.layout.fragment_photos,
@@ -56,61 +55,30 @@ class PhotosFragment : Fragment() {
             false
         )
 
+        //Get the images data
         listenForImages()
+
+        //set up recycler view's adapter
         binding.RecyclerviewGalleryGridimages.adapter = adapter
 
+        //Click listener for the recycler view items
         adapter.setOnItemClickListener { item, view ->
+            //Sending the data of the selected image to the new activity
             val imageItem = item as GalleryItem
             val intent = Intent(activity, ZoomedImage::class.java)
             intent.putExtra(IMAGE_LINK_KEY, imageItem?.imageItem)
             startActivity(intent)
         }
+
+        //Manage the grid layout
         val manager = GridLayoutManager(activity, 3)
         binding.RecyclerviewGalleryGridimages.layoutManager = manager
-
-
 
         return binding.root
 
     }
 
-    var selectedPhotoUri:Uri?=null
-
-//    private fun uploadImagetoFirebase(){
-//        if(selectedPhotoUri==null)return
-//        val filename=UUID.randomUUID().toString()
-//        val ref=FirebaseStorage.getInstance().getReference("/albumImages/$filename")
-//        ref.putFile(selectedPhotoUri!!)
-//            .addOnSuccessListener {
-//                ref.downloadUrl.addOnSuccessListener {
-//                    saveImageToFirebaseDatabase(it.toString())
-//                }
-//            }
-//    }
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if(requestCode==0 && resultCode== Activity.RESULT_OK && data != null){
-//            selectedPhotoUri = data.data
-//            uploadImagetoFirebase()
-//
-//            // val bitmapDrawable = BitmapDrawable(bitmap)
-//            //selectphoto_button_register.setBackgroundDrawable(bitmapDrawable)
-//        }
-//    }
-
-//    private fun saveImageToFirebaseDatabase(ImageUrl: String){
-////        val uid = FirebaseAuth.getInstance().uid
-////       val ref=FirebaseDatabase.getInstance().getReference("imagesList/$uid")
-////        val image=GalleryImage(ImageUrl)
-////        ref.setValue(image).addOnSuccessListener {
-////            Log.d(TAG, "Saved image")
-////
-////        }
-////    }
-
-    val imageMap=HashMap<String, GalleryImage>()
-
+    //Refresh when the list of images change
     private fun refreshRecyclerImages(){
         adapter.clear()
         imageMap.values.forEach {
@@ -118,6 +86,7 @@ class PhotosFragment : Fragment() {
         }
     }
 
+    //Load images from Firebase database
     private fun listenForImages() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/imageList/$uid")
@@ -135,35 +104,12 @@ class PhotosFragment : Fragment() {
                 refreshRecyclerImages()
             }
 
-            override fun onCancelled(error: DatabaseError) {
+            override fun onCancelled(error: DatabaseError) {}
 
-            }
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
 
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-
-            }
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
         })
-
-//        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onCancelled(error: DatabaseError) {
-//
-//            }
-//
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                snapshot.children.forEach {
-//                    val image = it.getValue(GalleryImage::class.java)
-//
-//                    //Log.d(MusicFragment.TAG,"song album:${song?.imageUrl}")
-//                    if (image != null) {
-//                        adapter.add(GalleryItem(image))
-//                    }
-//                }
-//            }
-//        })
     }
 
 

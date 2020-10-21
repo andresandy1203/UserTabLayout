@@ -1,4 +1,5 @@
 package com.example.userpagetablayout.helper
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
@@ -12,6 +13,7 @@ import java.util.*
 import kotlin.math.abs
 import kotlin.math.max
 
+//Swipe helper
 abstract class SwipeHelper(
     private val recyclerView: RecyclerView
 ) : ItemTouchHelper.SimpleCallback(
@@ -134,7 +136,8 @@ abstract class SwipeHelper(
         private val clickListener: UnderlayButtonClickListener
     ) {
         private var clickableRegion: RectF? = null
-        private val textSizeInPixel: Float = textSize * context.resources.displayMetrics.density // dp to px
+        private val textSizeInPixel: Float =
+            textSize * context.resources.displayMetrics.density // dp to px
         private val horizontalPadding = 50.0f
         val intrinsicWidth: Float
 

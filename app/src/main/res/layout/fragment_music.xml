@@ -5,21 +5,22 @@
     tools:context=".fragments.viewpagers.MusicFragment">
 
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_songs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </LinearLayout>
-        </ScrollView>
+    </ScrollView>
 
 </layout>

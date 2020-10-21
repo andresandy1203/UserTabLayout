@@ -41,13 +41,10 @@ class MusicFragment : Fragment() {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
+    //Set up adapter
     val adapter = GroupAdapter<GroupieViewHolder>()
-
+    //HashMap for the recycler view of songs
+    val SongsMap=HashMap<String, Song>()
 
     @SuppressLint()
     override fun onCreateView(
@@ -55,6 +52,8 @@ class MusicFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        //Inflate the layout for this fragment
+        //Data Binding
         val binding = DataBindingUtil.inflate<FragmentMusicBinding>(
             inflater,
             R.layout.fragment_music,
@@ -62,9 +61,10 @@ class MusicFragment : Fragment() {
             false
         )
 
-
-
+        //Get the songs data
         listenForSongs()
+
+        //set up recycler view's adapter
         binding.recyclerviewSongs.adapter = adapter
         binding.recyclerviewSongs.addItemDecoration(
             DividerItemDecoration(
@@ -73,66 +73,65 @@ class MusicFragment : Fragment() {
             )
         )
 
+        //Click listener for the recycler view items
         adapter.setOnItemClickListener { item, view ->
+            //Sending the data of the selected song to the new activity
             val songItem = item as SongRow
             val intent = Intent(activity, MusicPlay::class.java)
             intent.putExtra(SONG_LINK_KEY, songItem?.songItem)
             startActivity(intent)
         }
 
+        //Create the options in the Swipe buttons
         val itemTouchHelper = ItemTouchHelper(object:SwipeHelper(binding.recyclerviewSongs){
             override fun instantiateUnderlayButton(position: Int): List<UnderlayButton> {
-                var buttons=listOf<UnderlayButton>()
-                val deleteButton = deleteButton(position)
-                val editButton = editButton(position)
-                buttons= listOf(deleteButton,editButton)
-                return buttons
+                    var buttons=listOf<UnderlayButton>()
+                    val deleteButton = deleteButton(position)
+                    val editButton = editButton(position)
+                    buttons= listOf(deleteButton,editButton)
+                    return buttons
             }
 
         })
 
+        //Attach the Swipe helper into the recycler view items
         itemTouchHelper.attachToRecyclerView(binding.recyclerviewSongs)
 
-
-//        button_add.setOnClickListener {
-//            val intent=Intent(Intent.ACTION_PICK)
-//            intent.type="image/*"
-//            startActivityForResult(intent,0)
-//        }
-        // binding.recyclerviewSongs.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         return binding.root
 
 
     }
 
+    //Create the delete button for the Swipe Helper
     private fun deleteButton(position: Int):SwipeHelper.UnderlayButton{
         return SwipeHelper.UnderlayButton(requireActivity(), "Delete", 14.0f, android.R.color.holo_red_light,
             object:SwipeHelper.UnderlayButtonClickListener{
+                //on click it will call the removeSong function, sending the selected song data
                 override fun onClick() {
                    val item = adapter.getItem(position)
                     val songItem=item as SongRow
                     removeSong(songItem.songItem)
-                    //Toast.makeText(activity,"Delete Touched",Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
+    //Create the edit button for the Swipe Helper
     private fun editButton(position: Int):SwipeHelper.UnderlayButton{
         return SwipeHelper.UnderlayButton(requireActivity(), "Edit", 14.0f, android.R.color.holo_blue_light,
             object:SwipeHelper.UnderlayButtonClickListener{
+                //on click go to the edit activity
                 override fun onClick() {
+                    //Send the data of the selected song to the new activity
                     val item = adapter.getItem(position)
                     val songItem=item as SongRow
                     val intent = Intent(activity, EditSongDetails::class.java)
                     intent.putExtra(SONG_LINK_KEY, songItem?.songItem)
                     startActivity(intent)
-                    //val navController = activity?.findNavController(R.id.myNavHostFragment)
-                    //navController?.navigate(R.id.action_homeFragment_to_editSong.)
-                    //Toast.makeText(activity,"Edit Touched",Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
+    //Remove song from the Firebase Database function
     fun removeSong(song: Song){
         val uid = FirebaseAuth.getInstance().uid
         val ref= FirebaseDatabase.getInstance().getReference("songList/$uid/${song?.id}")
@@ -142,24 +141,15 @@ class MusicFragment : Fragment() {
         refreshRecyclerSongs()
     }
 
-
-    val SongsMap=HashMap<String, Song>()
-
+   //Refresh when the list of songs change
     private fun refreshRecyclerSongs(){
-
         adapter.clear()
         SongsMap.values.forEach {
             adapter.add(SongRow(it))
         }
     }
 
-    var selectedPhotoUri: Uri?=null
-
-
-    private fun uploadImagetoDataBase(){
-
-    }
-
+    //Load songs from Firebase database
     private fun listenForSongs() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/songList/$uid")
@@ -177,38 +167,13 @@ class MusicFragment : Fragment() {
                 refreshRecyclerSongs()
             }
 
-            override fun onCancelled(error: DatabaseError) {
+            override fun onCancelled(error: DatabaseError) {}
 
-            }
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
 
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-
-            }
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
         })
 
-//        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onCancelled(error: DatabaseError) {
-//
-//            }
-//
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                snapshot.children.forEach {
-//                    val song = it.getValue(Song::class.java)
-//                    Log.d(TAG, "song title:${song?.songName}")
-//                    Log.d(TAG, "song artist:${song?.songArtist}")
-//                    Log.d(TAG, "song album:${song?.albumUrl}")
-//                    if (song != null) {
-//                        adapter.add(SongRow(song))
-//                    }
-//                }
-//            }
-//        })
-
-//
     }
 
 

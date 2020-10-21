@@ -8,19 +8,19 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/Recyclerview_gallery_gridimages"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
-    </LinearLayout>
-    </ScrollView>
+            android:orientation="vertical">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Recyclerview_gallery_gridimages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </layout>
