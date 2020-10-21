@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.activities
+package com.example.userpagetablayout
 
 import android.app.Activity
 import android.content.Context
@@ -12,18 +12,16 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.example.userpagetablayout.R
-import com.example.userpagetablayout.databinding.ActivityEditSongDetailsBinding
 import com.example.userpagetablayout.databinding.ActivityRegisterBinding
-import com.example.userpagetablayout.models.User
+import com.example.userpagetablayout.main.UserPageActivity
+import com.example.userpagetablayout.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
 
-class RegisterActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
     companion object {
         var binding: ActivityRegisterBinding? = null
@@ -84,7 +82,9 @@ class RegisterActivity : AppCompatActivity() {
 
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             selectedPhotoUri = data.data!!
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,
+                selectedPhotoUri
+            )
             binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
 
             binding?.buttonAddImageRegister?.alpha = 0f
@@ -153,7 +153,7 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 //Initiate the User Page Activity
-                val intent = Intent(this, UserPage::class.java)
+                val intent = Intent(this, UserPageActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }

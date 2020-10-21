@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.fragments
+package com.example.userpagetablayout.main.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -12,14 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.databinding.ActivityZoomedImageBinding
 import com.example.userpagetablayout.databinding.FragmentHomeBinding
-import com.example.userpagetablayout.fragments.adapters.ViewPagerAdapter
-import com.example.userpagetablayout.fragments.viewpagers.MusicFragment
-import com.example.userpagetablayout.fragments.viewpagers.PhotosFragment
-import com.example.userpagetablayout.fragments.viewpagers.VideosFragment
-import com.example.userpagetablayout.models.GalleryImage
-import com.example.userpagetablayout.models.User
+import com.example.userpagetablayout.main.adapter.ViewPagerAdapter
+import com.example.userpagetablayout.model.GalleryImage
+import com.example.userpagetablayout.model.User
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*

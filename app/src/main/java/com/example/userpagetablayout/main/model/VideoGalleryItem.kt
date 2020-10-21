@@ -1,8 +1,8 @@
-package com.example.userpagetablayout.fragments.viewPagerFragments
+package com.example.userpagetablayout.main.model
 
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.models.Video
+import com.example.userpagetablayout.model.Video
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.gallery_item.view.*

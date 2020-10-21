@@ -1,16 +1,14 @@
-package com.example.userpagetablayout.activities
+package com.example.userpagetablayout.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.databinding.ActivityLoginBinding
 import com.example.userpagetablayout.databinding.ActivityMusicPlayBinding
-import com.example.userpagetablayout.fragments.viewpagers.MusicFragment
-import com.example.userpagetablayout.models.Song
-import kotlinx.android.synthetic.main.activity_music_play.*
+import com.example.userpagetablayout.main.view.MusicFragment
+import com.example.userpagetablayout.model.Song
 
-class MusicPlay : AppCompatActivity() {
+class MusicPlayActivity : AppCompatActivity() {
 
     var song: Song? = null
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,38 +1,28 @@
-package com.example.userpagetablayout.fragments.viewpagers
+package com.example.userpagetablayout.main.view
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.contentValuesOf
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.activities.EditSongDetails
-import com.example.userpagetablayout.activities.MusicPlay
-import com.example.userpagetablayout.activities.UserPage
+import com.example.userpagetablayout.main.EditSongDetailsActivity
+import com.example.userpagetablayout.main.MusicPlayActivity
 import com.example.userpagetablayout.databinding.FragmentMusicBinding
-import com.example.userpagetablayout.fragments.viewPagerFragments.SongRow
-import com.example.userpagetablayout.helper.SwipeHelper
+import com.example.userpagetablayout.main.model.SongRow
+import com.example.userpagetablayout.util.SwipeHelper
 
-import com.example.userpagetablayout.models.Song
-import com.example.userpagetablayout.models.Video
+import com.example.userpagetablayout.model.Song
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_music.*
 
 class MusicFragment : Fragment() {
     companion object {
@@ -77,7 +67,7 @@ class MusicFragment : Fragment() {
         adapter.setOnItemClickListener { item, view ->
             //Sending the data of the selected song to the new activity
             val songItem = item as SongRow
-            val intent = Intent(activity, MusicPlay::class.java)
+            val intent = Intent(activity, MusicPlayActivity::class.java)
             intent.putExtra(SONG_LINK_KEY, songItem?.songItem)
             startActivity(intent)
         }
@@ -124,7 +114,7 @@ class MusicFragment : Fragment() {
                     //Send the data of the selected song to the new activity
                     val item = adapter.getItem(position)
                     val songItem=item as SongRow
-                    val intent = Intent(activity, EditSongDetails::class.java)
+                    val intent = Intent(activity, EditSongDetailsActivity::class.java)
                     intent.putExtra(SONG_LINK_KEY, songItem?.songItem)
                     startActivity(intent)
                 }

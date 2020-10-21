@@ -1,22 +1,11 @@
-package com.example.userpagetablayout.fragments.viewPagerFragments
+package com.example.userpagetablayout.main.model
 
-import android.app.Activity
-import android.content.Context
-import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Glide.with
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.models.GalleryImage
-import com.example.userpagetablayout.models.Song
+import com.example.userpagetablayout.model.GalleryImage
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.gallery_item.view.*
-import kotlinx.android.synthetic.main.song_row.view.*
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.coroutineContext
 
 class GalleryItem(val imageItem: GalleryImage) : Item<GroupieViewHolder>() {
     companion object {

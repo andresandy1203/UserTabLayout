@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.models
+package com.example.userpagetablayout.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.fragments.viewpagers
+package com.example.userpagetablayout.main.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,18 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.activities.UserPage
-import com.example.userpagetablayout.activities.VideoPlayActivity
-import com.example.userpagetablayout.activities.ZoomedImage
+import com.example.userpagetablayout.main.VideoPlayActivity
 import com.example.userpagetablayout.databinding.FragmentVideosBinding
-import com.example.userpagetablayout.fragments.viewPagerFragments.GalleryItem
-import com.example.userpagetablayout.fragments.viewPagerFragments.VideoGalleryItem
-import com.example.userpagetablayout.models.Video
+import com.example.userpagetablayout.main.model.VideoGalleryItem
+import com.example.userpagetablayout.model.Video
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.gallery_item.*
 
 class VideosFragment : Fragment() {
     companion object {

@@ -1,11 +1,10 @@
-package com.example.userpagetablayout.fragments.viewPagerFragments
+package com.example.userpagetablayout.main.model
 
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.models.Song
+import com.example.userpagetablayout.model.Song
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import kotlinx.android.synthetic.main.gallery_item.view.*
 import kotlinx.android.synthetic.main.song_row.view.*
 
 class SongRow(val songItem: Song) : Item<GroupieViewHolder>() {

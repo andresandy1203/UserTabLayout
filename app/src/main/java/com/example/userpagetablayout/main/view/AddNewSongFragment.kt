@@ -1,6 +1,5 @@
-package com.example.userpagetablayout.fragments
+package com.example.userpagetablayout.main.view
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -17,15 +16,15 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.activities.UserPage
+import com.example.userpagetablayout.main.UserPageActivity
 import com.example.userpagetablayout.databinding.FragmentAddNewSongBinding
-import com.example.userpagetablayout.models.Song
+import com.example.userpagetablayout.model.Song
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
-class add_new_song : Fragment() {
+class AddNewSongFragment : Fragment() {
 
     companion object {
         var binding: FragmentAddNewSongBinding? = null
@@ -134,7 +133,7 @@ class add_new_song : Fragment() {
         ref.setValue(song).addOnSuccessListener {
             Toast.makeText(activity, "Song Saved", Toast.LENGTH_SHORT).show()
             Log.d("New song", "Saved song")
-            val intent = Intent(activity, UserPage::class.java)
+            val intent = Intent(activity, UserPageActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
 

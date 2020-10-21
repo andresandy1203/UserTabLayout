@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.activities
+package com.example.userpagetablayout.main
 
 import android.app.Activity
 import android.content.Context
@@ -11,18 +11,18 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
+import com.example.userpagetablayout.SplashActivity
 import com.example.userpagetablayout.databinding.ActivityEditSongDetailsBinding
-import com.example.userpagetablayout.fragments.viewpagers.MusicFragment
-import com.example.userpagetablayout.models.Song
+import com.example.userpagetablayout.main.view.MusicFragment
+import com.example.userpagetablayout.model.Song
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
-class EditSongDetails() : AppCompatActivity() {
+class EditSongDetailsActivity() : AppCompatActivity() {
     companion object {
         var binding: ActivityEditSongDetailsBinding? = null
         var selectedPhotoUri: Uri? = null
@@ -76,14 +76,14 @@ class EditSongDetails() : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.goHome_settings -> {
-                val intent = Intent(this, UserPage::class.java)
+                val intent = Intent(this, UserPageActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 //this.findNavController().navigate(R.id.action_homeFragment_to_settings)
 
             }
             R.id.sign_out -> {
-                val intent = Intent(this, RegisterActivity::class.java)
+                val intent = Intent(this, SplashActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
@@ -97,7 +97,9 @@ class EditSongDetails() : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             selectedPhotoUri = data.data
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,
+                selectedPhotoUri
+            )
 
             //Variable to helpcheck if the user selected a new image
             newImage = true
@@ -198,7 +200,7 @@ class EditSongDetails() : AppCompatActivity() {
         ref.setValue("https://music.youtube.com/search?q=$songArtist+$songName")
 
         //Go back to the UserPage activity
-        val intent = Intent(this, UserPage::class.java)
+        val intent = Intent(this, UserPageActivity::class.java)
         intent.flags =
             Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         Toast.makeText(this, "Changes were saved", Toast.LENGTH_SHORT).show()

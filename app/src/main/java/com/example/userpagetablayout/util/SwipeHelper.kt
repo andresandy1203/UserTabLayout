@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.helper
+package com.example.userpagetablayout.util
 
 import android.annotation.SuppressLint
 import android.content.Context

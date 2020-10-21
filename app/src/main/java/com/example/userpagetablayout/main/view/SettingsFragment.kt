@@ -1,6 +1,5 @@
-package com.example.userpagetablayout.fragments
+package com.example.userpagetablayout.main.view
 
-import android.app.ActionBar
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -8,37 +7,27 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.*
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.activities.RegisterActivity
-import com.example.userpagetablayout.activities.UserPage
+import com.example.userpagetablayout.SplashActivity
+import com.example.userpagetablayout.main.UserPageActivity
 import com.example.userpagetablayout.databinding.FragmentSettingsBinding
-import com.example.userpagetablayout.models.GalleryImage
-import com.example.userpagetablayout.models.User
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.EmailAuthCredential
+import com.example.userpagetablayout.model.User
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.fragment_settings.*
 import java.util.*
 
 
-class Settings : Fragment() {
+class SettingsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     companion object {
         var currentUser: User? = null
@@ -99,7 +88,7 @@ class Settings : Fragment() {
 
             }
             R.id.sign_out -> {
-                val intent = Intent(activity, RegisterActivity::class.java)
+                val intent = Intent(activity, SplashActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
@@ -113,7 +102,9 @@ class Settings : Fragment() {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             selectedPhotoUri = data.data
             val bitmap =
-                MediaStore.Images.Media.getBitmap(activity?.contentResolver, selectedPhotoUri)
+                MediaStore.Images.Media.getBitmap(activity?.contentResolver,
+                    selectedPhotoUri
+                )
             binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
 
             uploadImageToFireBase()
@@ -210,7 +201,7 @@ class Settings : Fragment() {
                     .addOnCompleteListener {
                         if (!it.isSuccessful) return@addOnCompleteListener
                         Log.d(TAG, "succesfully signed in $EditTextEmail $EditTextPassword")
-                        val intent = Intent(activity, UserPage::class.java)
+                        val intent = Intent(activity, UserPageActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         Toast.makeText(activity, "Changes were saved", Toast.LENGTH_SHORT).show()
@@ -278,7 +269,7 @@ class Settings : Fragment() {
                     .addOnCompleteListener {
                         if (!it.isSuccessful) return@addOnCompleteListener
                         Log.d(TAG, "succesfully signed in")
-                        val intent = Intent(activity, UserPage::class.java)
+                        val intent = Intent(activity, UserPageActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         Toast.makeText(activity, "Changes were saved", Toast.LENGTH_SHORT).show()
@@ -349,7 +340,7 @@ class Settings : Fragment() {
                     .addOnCompleteListener {
                         if (!it.isSuccessful) return@addOnCompleteListener
                         Log.d(TAG, "succesfully signed in $currentEmail")
-                        val intent = Intent(activity, UserPage::class.java)
+                        val intent = Intent(activity, UserPageActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         Toast.makeText(activity, "Changes were saved", Toast.LENGTH_SHORT).show()
@@ -390,7 +381,7 @@ class Settings : Fragment() {
 
 
             }
-            val intent = Intent(activity, UserPage::class.java)
+            val intent = Intent(activity, UserPageActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             Toast.makeText(activity, "Changes were saved", Toast.LENGTH_SHORT).show()
             startActivity(intent)
@@ -415,7 +406,7 @@ class Settings : Fragment() {
                 binding?.EdittextEmailSettings?.hint =
                     "${FirebaseAuth.getInstance().currentUser?.email}"
                 binding?.selectedPhotoImageview?.let {
-                    Glide.with(this@Settings).load(currentUser?.profileImageUrl).into(it)
+                    Glide.with(this@SettingsFragment).load(currentUser?.profileImageUrl).into(it)
                 }
 
             }

@@ -11,24 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.EditSongDetails"></activity>
+        <activity android:name=".main.EditSongDetailsActivity"></activity>
         <activity android:name=".activities.Settings" />
-        <activity android:name=".fragments.add_new_song" />
-        <activity android:name=".activities.VideoPlayActivity" />
-        <activity android:name=".activities.ZoomedImage" />
-        <activity android:name=".activities.MusicPlay" />
-        <activity android:name=".activities.UserPage">
+        <activity android:name="com.example.userpagetablayout.main.fragments.add_new_song" />
+        <activity android:name=".main.VideoPlayActivity" />
+        <activity android:name=".main.ZoomedImageActivity" />
+        <activity android:name=".main.MusicPlayActivity" />
+        <activity android:name=".main.UserPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".SplashActivity" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

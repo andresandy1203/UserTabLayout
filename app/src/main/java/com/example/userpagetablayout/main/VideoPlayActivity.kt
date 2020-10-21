@@ -1,29 +1,15 @@
-package com.example.userpagetablayout.activities
+package com.example.userpagetablayout.main
 
-import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.MediaController
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.example.userpagetablayout.R
 import com.example.userpagetablayout.databinding.ActivityVideoPlayBinding
-import com.example.userpagetablayout.fragments.viewpagers.MusicFragment
-import com.example.userpagetablayout.fragments.viewpagers.VideosFragment
-import com.example.userpagetablayout.models.Song
-import com.example.userpagetablayout.models.Video
+import com.example.userpagetablayout.main.view.VideosFragment
+import com.example.userpagetablayout.model.Video
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayerView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_music_play.*
-import kotlinx.android.synthetic.main.activity_video_play.*
 
 class VideoPlayActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
 

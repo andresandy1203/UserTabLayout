@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.activities
+package com.example.userpagetablayout
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,18 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 
-import com.example.userpagetablayout.R
-import com.example.userpagetablayout.databinding.ActivityEditSongDetailsBinding
 import com.example.userpagetablayout.databinding.ActivityLoginBinding
-import com.example.userpagetablayout.models.User
+import com.example.userpagetablayout.main.UserPageActivity
+import com.example.userpagetablayout.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -40,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
         //Go back to register activity
         binding.gotoregister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this, SplashActivity::class.java)
             startActivity(intent)
         }
 
@@ -58,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("Login", "Succesfully logged user ${it.result?.user?.uid}")
 
                     //Go to UserPage
-                    val intent = Intent(this, UserPage::class.java)
+                    val intent = Intent(this, UserPageActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
 
                     startActivity(intent)
