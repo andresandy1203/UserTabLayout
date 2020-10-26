@@ -22,6 +22,8 @@ import com.example.userpagetablayout.model.Song
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.util.*
 
 class AddNewSongFragment : Fragment() {
@@ -49,9 +51,9 @@ class AddNewSongFragment : Fragment() {
 
         //Add click listener to allow to add the image of the song
         binding?.buttonAddSongImageRegister?.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, 0)
+           //initiate crop image activity
+            CropImage.activity().setFixAspectRatio(true).setAspectRatio(150,150).start(requireContext(), this)
+
         }
 
         //Set key listeners
@@ -63,18 +65,23 @@ class AddNewSongFragment : Fragment() {
 
     //Get the bitMap from the data of the selected image from the ACTION_PICK intent
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        //Create bitmap and Uri from cropped image
+        if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode === Activity.RESULT_OK) {
+                val resultUri = result.uri
+                selectedPhotoUri = resultUri
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(activity?.contentResolver,
+                        selectedPhotoUri
+                    )
+                binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
 
-        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
-            selectedPhotoUri = data.data
+                binding?.buttonAddSongImageRegister?.alpha = 0f
 
-            val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, selectedPhotoUri)
-
-            //Change the displayed image to the selected image's bitmap
-            binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
-
-            binding?.buttonAddSongImageRegister?.alpha = 0f
-
+            } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                val error = result.error
+            }
         }
     }
 

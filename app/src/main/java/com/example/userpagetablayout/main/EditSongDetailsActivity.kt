@@ -20,6 +20,8 @@ import com.example.userpagetablayout.model.Song
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.util.*
 
 class EditSongDetailsActivity() : AppCompatActivity() {
@@ -95,20 +97,25 @@ class EditSongDetailsActivity() : AppCompatActivity() {
     //Get the bitMap from the data of the selected image from the ACTION_PICK intent
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
-            selectedPhotoUri = data.data
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,
-                selectedPhotoUri
-            )
+        //Create bitmap and Uri from cropped image
+        if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode === Activity.RESULT_OK) {
+                val resultUri = result.uri
+                selectedPhotoUri = resultUri
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(contentResolver,
+                        selectedPhotoUri
+                    )
+                //Variable to helpcheck if the user selected a new image
+              newImage = true
+              binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
 
-            //Variable to helpcheck if the user selected a new image
-            newImage = true
-            binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
+                uploadImageToFireBase()
 
-
-            uploadImageToFireBase()
-
-
+            } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                val error = result.error
+            }
         }
     }
 
@@ -137,9 +144,9 @@ class EditSongDetailsActivity() : AppCompatActivity() {
 
     //Create the intent for selection of image when either the image or button is clicked
     private fun newpic() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, 0)
+        //Initiate crop image activity
+        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setFixAspectRatio(true).setAspectRatio(150,150).start( this)
+
     }
 
     //Get the reference from firebase and upload the Uri of the selected image
@@ -150,7 +157,6 @@ class EditSongDetailsActivity() : AppCompatActivity() {
         ref.putFile(selectedPhotoUri!!)
             .addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener {
-
                     newImageUrl = it.toString()
                 }
             }

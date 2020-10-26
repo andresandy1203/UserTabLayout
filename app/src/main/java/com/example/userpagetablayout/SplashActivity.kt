@@ -14,10 +14,13 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.userpagetablayout.databinding.ActivityRegisterBinding
 import com.example.userpagetablayout.main.UserPageActivity
+import com.example.userpagetablayout.main.view.SettingsFragment
 import com.example.userpagetablayout.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.util.*
 
 
@@ -49,9 +52,10 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding?.buttonAddImageRegister?.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, 0)
+//            val intent = Intent(Intent.ACTION_PICK)
+//            intent.type = "image/*"
+//            startActivityForResult(intent, 0)
+            CropImage.activity().setCropShape(CropImageView.CropShape.OVAL).setGuidelines(CropImageView.Guidelines.ON).setFixAspectRatio(true).setAspectRatio(150,150).start( this)
         }
 
         //Set key listeners
@@ -77,17 +81,23 @@ class SplashActivity : AppCompatActivity() {
 
     //Get the bitMap from the data of the selected image from the ACTION_PICK intent
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
+        //Create bitmap and Uri from cropped image
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode === Activity.RESULT_OK) {
+                val resultUri = result.uri
+                selectedPhotoUri = resultUri
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(contentResolver,
+                        selectedPhotoUri
+                    )
+                binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
+                binding?.buttonAddImageRegister?.alpha=0f
 
-        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
-            selectedPhotoUri = data.data!!
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,
-                selectedPhotoUri
-            )
-            binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
-
-            binding?.buttonAddImageRegister?.alpha = 0f
+            } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                val error = result.error
+            }
         }
     }
 

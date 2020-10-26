@@ -3,6 +3,8 @@
     package="com.example.userpagetablayout">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -10,10 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"><activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
         <activity android:name=".main.EditSongDetailsActivity"></activity>
-        <activity android:name=".activities.Settings" />
-        <activity android:name="com.example.userpagetablayout.main.fragments.add_new_song" />
         <activity android:name=".main.VideoPlayActivity" />
         <activity android:name=".main.ZoomedImageActivity" />
         <activity android:name=".main.MusicPlayActivity" />

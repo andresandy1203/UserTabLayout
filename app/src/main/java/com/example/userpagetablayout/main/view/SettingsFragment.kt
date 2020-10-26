@@ -8,14 +8,14 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
 import com.example.userpagetablayout.SplashActivity
-import com.example.userpagetablayout.main.UserPageActivity
 import com.example.userpagetablayout.databinding.FragmentSettingsBinding
+import com.example.userpagetablayout.main.UserPageActivity
 import com.example.userpagetablayout.model.User
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -24,11 +24,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.util.*
 
 
 class SettingsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     companion object {
         var currentUser: User? = null
         var selectedPhotoUri: Uri? = null
@@ -40,8 +42,6 @@ class SettingsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
 
 
@@ -68,7 +68,6 @@ class SettingsFragment : Fragment() {
             newpic()
         }
 
-
         // Inflate the layout for this fragment
         return binding?.root
     }
@@ -84,8 +83,6 @@ class SettingsFragment : Fragment() {
             R.id.goHome_settings -> {
                 val navController = activity?.findNavController(R.id.myNavHostFragment)
                 navController?.navigate(R.id.action_settings_to_homeFragment)
-                //this.findNavController().navigate(R.id.action_homeFragment_to_settings)
-
             }
             R.id.sign_out -> {
                 val intent = Intent(activity, SplashActivity::class.java)
@@ -98,9 +95,12 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
-            selectedPhotoUri = data.data
+        //Create Uri and bitmap from cropping selected image
+        if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode === Activity.RESULT_OK) {
+                val resultUri = result.uri
+                selectedPhotoUri = resultUri
             val bitmap =
                 MediaStore.Images.Media.getBitmap(activity?.contentResolver,
                     selectedPhotoUri
@@ -109,13 +109,16 @@ class SettingsFragment : Fragment() {
 
             uploadImageToFireBase()
 
+            } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                val error = result.error
+            }
         }
+
     }
 
     private fun newpic() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, 0)
+        //Initiate crop activity
+        CropImage.activity().setCropShape(CropImageView.CropShape.OVAL).setFixAspectRatio(true).setAspectRatio(150,150).start(requireContext(), this)
     }
 
     private fun uploadImageToFireBase() {
@@ -193,9 +196,7 @@ class SettingsFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                 }
-                //sign in again
-
-
+                //Sign in again
                 FirebaseAuth.getInstance()
                     .signInWithEmailAndPassword(EditTextEmail, EditTextPassword)
                     .addOnCompleteListener {
@@ -262,8 +263,6 @@ class SettingsFragment : Fragment() {
 
                 Log.d(TAG, "the password is: $EditTextPassword, the email is $EditTextEmail")
                 //sign in again
-
-
                 FirebaseAuth.getInstance()
                     .signInWithEmailAndPassword(EditTextEmail, currentPassword)
                     .addOnCompleteListener {
