@@ -13,8 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="463" />
-                            <option name="y" value="-34" />
+                            <option name="x" value="440" />
+                            <option name="y" value="197" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -25,12 +25,17 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="12" />
+                            <option name="x" value="227" />
+                            <option name="y" value="-31" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_homeFragment_to_add_new_song">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_homeFragment_to_settings">
                               <value>
                                 <LayoutPositions />
@@ -46,8 +51,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="437" />
+                            <option name="y" value="-92" />
                           </Point>
                         </option>
                         <option name="myPositions">
