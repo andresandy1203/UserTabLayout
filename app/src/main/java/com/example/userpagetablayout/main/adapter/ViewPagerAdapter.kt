@@ -1,7 +1,9 @@
 package com.example.userpagetablayout.main.adapter
 
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.adapter.FragmentViewHolder
 
 
 class ViewPagerAdapter(fragment: Fragment) :
@@ -14,6 +16,7 @@ class ViewPagerAdapter(fragment: Fragment) :
         return mFragmentList.size
 
     }
+
 
     override fun createFragment(position: Int): Fragment {
         val fragment = mFragmentList[position]

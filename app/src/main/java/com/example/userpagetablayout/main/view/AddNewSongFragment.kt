@@ -127,7 +127,6 @@ class AddNewSongFragment : Fragment() {
     //Save the song to the Firebase Database, collecting the data from user's input
     private fun saveSongToFirebaseDatabase(ImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid
-        val filename = UUID.randomUUID().toString()
         val ref = FirebaseDatabase.getInstance().getReference("songList/$uid").push()
         val songname = binding?.EdittextSongnameRegister?.text.toString()
         val songArtist = binding?.EdittextArtistNameRegister?.text.toString()

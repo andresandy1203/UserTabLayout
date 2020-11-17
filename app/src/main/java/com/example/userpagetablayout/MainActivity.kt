@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.userpagetablayout.main.UserPageActivity
 
-//Splash activity
+//splash activity
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
-        //Splash function
+        //splash function
         Handler().postDelayed({
             val intent = Intent(this@MainActivity, UserPageActivity::class.java)
             startActivity(intent)

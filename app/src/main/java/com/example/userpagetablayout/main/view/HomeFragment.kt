@@ -12,7 +12,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
+import com.example.userpagetablayout.SplashActivity
 import com.example.userpagetablayout.databinding.FragmentHomeBinding
+import com.example.userpagetablayout.main.YoutubeSearchActivity
 import com.example.userpagetablayout.main.adapter.ViewPagerAdapter
 import com.example.userpagetablayout.model.GalleryImage
 import com.example.userpagetablayout.model.User
@@ -68,8 +70,11 @@ class HomeFragment : Fragment() {
                     Log.d(TAG, "we at photos")
                 }
 
-                2 -> Log.d(TAG, "we at videos")
-
+                2 -> {
+                    Log.d(TAG, "we at videos")
+                    val intent1 = Intent(activity, YoutubeSearchActivity::class.java)
+                    startActivity(intent1)
+                }
             }
 
         }
@@ -79,6 +84,7 @@ class HomeFragment : Fragment() {
         return binding.root
 
     }
+
 
     //Set up menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -108,6 +114,8 @@ class HomeFragment : Fragment() {
         }
 
     }
+
+
 
     //Setup the tabs
     private fun setUpTabs(binding: FragmentHomeBinding) {
