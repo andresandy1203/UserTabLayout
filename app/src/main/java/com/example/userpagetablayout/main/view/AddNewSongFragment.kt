@@ -31,13 +31,14 @@ class AddNewSongFragment : Fragment() {
     companion object {
         var binding: FragmentAddNewSongBinding? = null
     }
+
     var selectedPhotoUri: Uri? = null
 
     @Suppress("UNUSED_VARIABLE")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View?{
+    ): View? {
         binding = DataBindingUtil.inflate<FragmentAddNewSongBinding>(
             inflater,
             R.layout.fragment_add_new_song,
@@ -51,14 +52,25 @@ class AddNewSongFragment : Fragment() {
 
         //Add click listener to allow to add the image of the song
         binding?.buttonAddSongImageRegister?.setOnClickListener {
-           //initiate crop image activity
-            CropImage.activity().setFixAspectRatio(true).setAspectRatio(150,150).start(requireContext(), this)
+            //initiate crop image activity
+            CropImage.activity().setFixAspectRatio(true).setAspectRatio(150, 150)
+                .start(requireContext(), this)
 
         }
 
         //Set key listeners
-        binding?.EdittextSongnameRegister?.setOnKeyListener { view, keyCode, _ -> handleKeyEvent(view, keyCode) }
-        binding?.EdittextArtistNameRegister?.setOnKeyListener { view, keyCode, _ -> handleKeyEvent(view, keyCode) }
+        binding?.EdittextSongnameRegister?.setOnKeyListener { view, keyCode, _ ->
+            handleKeyEvent(
+                view,
+                keyCode
+            )
+        }
+        binding?.EdittextArtistNameRegister?.setOnKeyListener { view, keyCode, _ ->
+            handleKeyEvent(
+                view,
+                keyCode
+            )
+        }
         return binding?.root
     }
 
@@ -72,7 +84,8 @@ class AddNewSongFragment : Fragment() {
                 val resultUri = result.uri
                 selectedPhotoUri = resultUri
                 val bitmap =
-                    MediaStore.Images.Media.getBitmap(activity?.contentResolver,
+                    MediaStore.Images.Media.getBitmap(
+                        activity?.contentResolver,
                         selectedPhotoUri
                     )
                 binding?.selectedPhotoImageview?.setImageBitmap(bitmap)

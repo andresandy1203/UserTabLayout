@@ -29,6 +29,7 @@ abstract class SwipeHelper(
         }
     }
 
+    //Touch listener
     @SuppressLint("ClickableViewAccessibility")
     private val touchListener = View.OnTouchListener { _, event ->
         if (swipedPosition < 0) return@OnTouchListener false
@@ -50,6 +51,7 @@ abstract class SwipeHelper(
         }
     }
 
+    //Draw buttons
     private fun drawButtons(
         canvas: Canvas,
         buttons: List<UnderlayButton>,

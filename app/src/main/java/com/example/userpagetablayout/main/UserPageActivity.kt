@@ -19,12 +19,13 @@ import com.google.firebase.ktx.Firebase
 class UserPageActivity : AppCompatActivity() {
 
     companion object {
-        var currentUser: User?=null
+        var currentUser: User? = null
         val TAG = "UserPage"
-        var binding:ActivityUserPageBinding?=null
-        var Bartitle="User Page"
+        var binding: ActivityUserPageBinding? = null
+        var Bartitle = "User Page"
     }
-    var navController:NavController?=null
+
+    var navController: NavController? = null
 
     private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +36,12 @@ class UserPageActivity : AppCompatActivity() {
 
         //DataBinding
         @Suppress("UNUSED_VARIABLE")
-         binding = DataBindingUtil.setContentView<ActivityUserPageBinding>(
+        binding = DataBindingUtil.setContentView<ActivityUserPageBinding>(
             this,
-             R.layout.activity_user_page
+            R.layout.activity_user_page
         )
 
-        supportActionBar?.title=
+        supportActionBar?.title =
             Bartitle
 
         //Enable navigation between fragments
@@ -52,7 +53,7 @@ class UserPageActivity : AppCompatActivity() {
 
     //Use navigation controller
     override fun onSupportNavigateUp(): Boolean {
-         val navController = this.findNavController(R.id.myNavHostFragment)
+        val navController = this.findNavController(R.id.myNavHostFragment)
         return NavigationUI.navigateUp(navController!!, drawerLayout)
     }
 

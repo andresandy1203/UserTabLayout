@@ -52,10 +52,9 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding?.buttonAddImageRegister?.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_PICK)
-//            intent.type = "image/*"
-//            startActivityForResult(intent, 0)
-            CropImage.activity().setCropShape(CropImageView.CropShape.OVAL).setGuidelines(CropImageView.Guidelines.ON).setFixAspectRatio(true).setAspectRatio(150,150).start( this)
+            CropImage.activity().setCropShape(CropImageView.CropShape.OVAL)
+                .setGuidelines(CropImageView.Guidelines.ON).setFixAspectRatio(true)
+                .setAspectRatio(150, 150).start(this)
         }
 
         //Set key listeners
@@ -89,11 +88,12 @@ class SplashActivity : AppCompatActivity() {
                 val resultUri = result.uri
                 selectedPhotoUri = resultUri
                 val bitmap =
-                    MediaStore.Images.Media.getBitmap(contentResolver,
+                    MediaStore.Images.Media.getBitmap(
+                        contentResolver,
                         selectedPhotoUri
                     )
                 binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
-                binding?.buttonAddImageRegister?.alpha=0f
+                binding?.buttonAddImageRegister?.alpha = 0f
 
             } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 val error = result.error

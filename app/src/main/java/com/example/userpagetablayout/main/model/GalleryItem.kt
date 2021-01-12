@@ -15,7 +15,8 @@ class GalleryItem(val imageItem: GalleryImage) : Item<GroupieViewHolder>() {
     //Bind the viewHolder to the Gallery Item UI
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
-       Glide.with(viewHolder.itemView.context).load(imageItem.imageUrl).into(viewHolder.itemView.imageview_item)
+        Glide.with(viewHolder.itemView.context).load(imageItem.imageUrl)
+            .into(viewHolder.itemView.imageview_item)
 
     }
 

@@ -28,8 +28,9 @@ class PhotosFragment : Fragment() {
 
     //Set up adapter
     val adapter = GroupAdapter<GroupieViewHolder>()
+
     //HashMap for the recycler view of images
-    val imageMap=HashMap<String, GalleryImage>()
+    val imageMap = HashMap<String, GalleryImage>()
 
     @SuppressLint()
     override fun onCreateView(
@@ -69,7 +70,7 @@ class PhotosFragment : Fragment() {
     }
 
     //Refresh when the list of images change
-    private fun refreshRecyclerImages(){
+    private fun refreshRecyclerImages() {
         adapter.clear()
         imageMap.values.forEach {
             adapter.add(GalleryItem(it))
@@ -81,16 +82,16 @@ class PhotosFragment : Fragment() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/imageList/$uid")
 
-        ref.addChildEventListener(object: ChildEventListener {
+        ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val Image=snapshot.getValue(GalleryImage::class.java)?:return
-                imageMap[snapshot.key!!]=Image
+                val Image = snapshot.getValue(GalleryImage::class.java) ?: return
+                imageMap[snapshot.key!!] = Image
                 refreshRecyclerImages()
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                val Image=snapshot.getValue(GalleryImage::class.java)?:return
-                imageMap[snapshot.key!!]=Image
+                val Image = snapshot.getValue(GalleryImage::class.java) ?: return
+                imageMap[snapshot.key!!] = Image
                 refreshRecyclerImages()
             }
 

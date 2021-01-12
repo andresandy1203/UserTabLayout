@@ -14,10 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
-    //val userLogged= FirebaseAuth.getInstance().currentUser
     companion object {
         val TAG = "LoginActivity"
-        var currentUser: User? = null
     }
 
 

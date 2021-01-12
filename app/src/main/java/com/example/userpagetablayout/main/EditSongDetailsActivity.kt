@@ -62,8 +62,18 @@ class EditSongDetailsActivity() : AppCompatActivity() {
         }
 
         //Set key listeners
-        binding?.EdittextSongnameEdit?.setOnKeyListener { view, keyCode, _ -> handleKeyEvent(view, keyCode) }
-        binding?.EdittextArtistNameEdit?.setOnKeyListener { view, keyCode, _ -> handleKeyEvent(view, keyCode) }
+        binding?.EdittextSongnameEdit?.setOnKeyListener { view, keyCode, _ ->
+            handleKeyEvent(
+                view,
+                keyCode
+            )
+        }
+        binding?.EdittextArtistNameEdit?.setOnKeyListener { view, keyCode, _ ->
+            handleKeyEvent(
+                view,
+                keyCode
+            )
+        }
 
     }
 
@@ -104,12 +114,13 @@ class EditSongDetailsActivity() : AppCompatActivity() {
                 val resultUri = result.uri
                 selectedPhotoUri = resultUri
                 val bitmap =
-                    MediaStore.Images.Media.getBitmap(contentResolver,
+                    MediaStore.Images.Media.getBitmap(
+                        contentResolver,
                         selectedPhotoUri
                     )
                 //Variable to helpcheck if the user selected a new image
-              newImage = true
-              binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
+                newImage = true
+                binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
 
                 uploadImageToFireBase()
 
@@ -145,7 +156,8 @@ class EditSongDetailsActivity() : AppCompatActivity() {
     //Create the intent for selection of image when either the image or button is clicked
     private fun newpic() {
         //Initiate crop image activity
-        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setFixAspectRatio(true).setAspectRatio(150,150).start( this)
+        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setFixAspectRatio(true)
+            .setAspectRatio(150, 150).start(this)
 
     }
 

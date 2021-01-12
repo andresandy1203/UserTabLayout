@@ -25,17 +25,20 @@ import java.util.*
 
 class YoutubeSearchActivity : AppCompatActivity() {
 
-    var binding:ActivityYoutubeSearchBinding?=null
+    var binding: ActivityYoutubeSearchBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityYoutubeSearchBinding>(this, R.layout.activity_youtube_search)
+        binding = DataBindingUtil.setContentView<ActivityYoutubeSearchBinding>(
+            this,
+            R.layout.activity_youtube_search
+        )
 
         //Enable the needed setttings
         binding?.videoSearch?.settings?.javaScriptEnabled = true
         binding?.videoSearch?.settings?.loadWithOverviewMode = true
         binding?.videoSearch?.settings?.useWideViewPort = true
-        binding?.videoSearch?.webViewClient=object :WebViewClient(){
+        binding?.videoSearch?.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(
                 view: WebView?,
                 request: WebResourceRequest?
@@ -50,20 +53,20 @@ class YoutubeSearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveVideoToFirebase(){
-        val videoUrl=binding?.videoSearch?.url
+    private fun saveVideoToFirebase() {
+        val videoUrl = binding?.videoSearch?.url
         Log.d("YoutubeSearch", "$videoUrl")
         val videoID = getVideoId(videoUrl!!)
         Log.d("YoutubeSearch", "ID: $videoID")
-        if(videoID==null){
+        if (videoID == null) {
             Toast.makeText(this, "Please select a valid youtube video", Toast.LENGTH_SHORT).show()
-        }else{
-
+        } else {
+            //If a valid video ID was found it is saved to Firebase
             Toast.makeText(this, "Saving Video", Toast.LENGTH_SHORT).show()
-            val videoImage ="https://img.youtube.com/vi/$videoID/0.jpg";
+            val videoImage = "https://img.youtube.com/vi/$videoID/0.jpg";
             val uid = FirebaseAuth.getInstance().uid
             val ref = FirebaseDatabase.getInstance().getReference("videoList/$uid").push()
-            val Video=Video(ref.key!!,videoImage,videoID)
+            val Video = Video(ref.key!!, videoImage, videoID)
             ref.setValue(Video).addOnSuccessListener {
                 Toast.makeText(this, "Video Saved", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, UserPageActivity::class.java)
@@ -77,15 +80,17 @@ class YoutubeSearchActivity : AppCompatActivity() {
         }
 
     }
-    private fun getVideoId(@NonNull videoUrl:String): String? {
-        val reg:String = "http(?:s)?:\\/\\/(?:m.)?(?:www\\.)?youtu(?:\\.be\\/|be\\.com\\/(?:watch\\?(?:feature=youtu.be\\&)?v=|v\\/|embed\\/|user\\/(?:[\\w#]+\\/)+))([^&#?\\n]+)"
+
+    private fun getVideoId(@NonNull videoUrl: String): String? {
+        //Create patten to extract video ID
+        val reg: String =
+            "http(?:s)?:\\/\\/(?:m.)?(?:www\\.)?youtu(?:\\.be\\/|be\\.com\\/(?:watch\\?(?:feature=youtu.be\\&)?v=|v\\/|embed\\/|user\\/(?:[\\w#]+\\/)+))([^&#?\\n]+)"
         val pattern = Pattern.compile(reg, Pattern.CASE_INSENSITIVE);
         val matcher = pattern.matcher(videoUrl)
 
-        if (matcher.find()){
+        if (matcher.find()) {
             return matcher.group(1)
-        }
-        else{
+        } else {
             return null
         }
 

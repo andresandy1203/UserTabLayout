@@ -27,7 +27,7 @@ class VideoPlayActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedList
         )
 
         //Initialize API
-        binding?.YoutubeVideoView?.initialize("AIzaSyARKh8YVeVLW_rDPwdskyBq6EsAgsg76TY", this)
+        binding?.YoutubeVideoView?.initialize("YOUR API KEY", this)
 
         //Get video data from previous activity
         video = intent.getParcelableExtra(VideosFragment.VIDEO_LINK_KEY)

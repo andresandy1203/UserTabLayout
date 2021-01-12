@@ -116,7 +116,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
     //Setup the tabs
     private fun setUpTabs(binding: FragmentHomeBinding) {
 

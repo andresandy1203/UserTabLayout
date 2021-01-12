@@ -39,9 +39,9 @@ class ZoomedImageActivity : AppCompatActivity() {
     }
 
     //Remove the image from Firebase Database
-    fun removeImage(){
+    fun removeImage() {
         val uid = FirebaseAuth.getInstance().uid
-        val ref=FirebaseDatabase.getInstance().getReference("imageList/$uid/${galleryImage?.id}")
+        val ref = FirebaseDatabase.getInstance().getReference("imageList/$uid/${galleryImage?.id}")
         ref.removeValue()
         Toast.makeText(this, "ImageDeleted", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, UserPageActivity::class.java)

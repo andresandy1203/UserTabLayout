@@ -101,13 +101,14 @@ class SettingsFragment : Fragment() {
             if (resultCode === Activity.RESULT_OK) {
                 val resultUri = result.uri
                 selectedPhotoUri = resultUri
-            val bitmap =
-                MediaStore.Images.Media.getBitmap(activity?.contentResolver,
-                    selectedPhotoUri
-                )
-            binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(
+                        activity?.contentResolver,
+                        selectedPhotoUri
+                    )
+                binding?.selectedPhotoImageview?.setImageBitmap(bitmap)
 
-            uploadImageToFireBase()
+                uploadImageToFireBase()
 
             } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 val error = result.error
@@ -118,7 +119,8 @@ class SettingsFragment : Fragment() {
 
     private fun newpic() {
         //Initiate crop activity
-        CropImage.activity().setCropShape(CropImageView.CropShape.OVAL).setFixAspectRatio(true).setAspectRatio(150,150).start(requireContext(), this)
+        CropImage.activity().setCropShape(CropImageView.CropShape.OVAL).setFixAspectRatio(true)
+            .setAspectRatio(150, 150).start(requireContext(), this)
     }
 
     private fun uploadImageToFireBase() {

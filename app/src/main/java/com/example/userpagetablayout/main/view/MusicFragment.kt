@@ -33,8 +33,9 @@ class MusicFragment : Fragment() {
 
     //Set up adapter
     val adapter = GroupAdapter<GroupieViewHolder>()
+
     //HashMap for the recycler view of songs
-    val SongsMap=HashMap<String, Song>()
+    val SongsMap = HashMap<String, Song>()
 
     @SuppressLint()
     override fun onCreateView(
@@ -73,13 +74,13 @@ class MusicFragment : Fragment() {
         }
 
         //Create the options in the Swipe buttons
-        val itemTouchHelper = ItemTouchHelper(object:SwipeHelper(binding.recyclerviewSongs){
+        val itemTouchHelper = ItemTouchHelper(object : SwipeHelper(binding.recyclerviewSongs) {
             override fun instantiateUnderlayButton(position: Int): List<UnderlayButton> {
-                    var buttons=listOf<UnderlayButton>()
-                    val deleteButton = deleteButton(position)
-                    val editButton = editButton(position)
-                    buttons= listOf(deleteButton,editButton)
-                    return buttons
+                var buttons = listOf<UnderlayButton>()
+                val deleteButton = deleteButton(position)
+                val editButton = editButton(position)
+                buttons = listOf(deleteButton, editButton)
+                return buttons
             }
 
         })
@@ -93,27 +94,33 @@ class MusicFragment : Fragment() {
     }
 
     //Create the delete button for the Swipe Helper
-    private fun deleteButton(position: Int):SwipeHelper.UnderlayButton{
-        return SwipeHelper.UnderlayButton(requireActivity(), "Delete", 14.0f, android.R.color.holo_red_light,
-            object:SwipeHelper.UnderlayButtonClickListener{
+    private fun deleteButton(position: Int): SwipeHelper.UnderlayButton {
+        return SwipeHelper.UnderlayButton(requireActivity(),
+            "Delete",
+            14.0f,
+            android.R.color.holo_red_light,
+            object : SwipeHelper.UnderlayButtonClickListener {
                 //on click it will call the removeSong function, sending the selected song data
                 override fun onClick() {
-                   val item = adapter.getItem(position)
-                    val songItem=item as SongRow
+                    val item = adapter.getItem(position)
+                    val songItem = item as SongRow
                     removeSong(songItem.songItem)
                 }
             })
     }
 
     //Create the edit button for the Swipe Helper
-    private fun editButton(position: Int):SwipeHelper.UnderlayButton{
-        return SwipeHelper.UnderlayButton(requireActivity(), "Edit", 14.0f, android.R.color.holo_blue_light,
-            object:SwipeHelper.UnderlayButtonClickListener{
+    private fun editButton(position: Int): SwipeHelper.UnderlayButton {
+        return SwipeHelper.UnderlayButton(requireActivity(),
+            "Edit",
+            14.0f,
+            android.R.color.holo_blue_light,
+            object : SwipeHelper.UnderlayButtonClickListener {
                 //on click go to the edit activity
                 override fun onClick() {
                     //Send the data of the selected song to the new activity
                     val item = adapter.getItem(position)
-                    val songItem=item as SongRow
+                    val songItem = item as SongRow
                     val intent = Intent(activity, EditSongDetailsActivity::class.java)
                     intent.putExtra(SONG_LINK_KEY, songItem?.songItem)
                     startActivity(intent)
@@ -122,17 +129,17 @@ class MusicFragment : Fragment() {
     }
 
     //Remove song from the Firebase Database function
-    fun removeSong(song: Song){
+    fun removeSong(song: Song) {
         val uid = FirebaseAuth.getInstance().uid
-        val ref= FirebaseDatabase.getInstance().getReference("songList/$uid/${song?.id}")
+        val ref = FirebaseDatabase.getInstance().getReference("songList/$uid/${song?.id}")
         ref.removeValue()
         Toast.makeText(activity, "Song Deleted", Toast.LENGTH_SHORT).show()
         SongsMap.values.remove(song)
         refreshRecyclerSongs()
     }
 
-   //Refresh when the list of songs change
-    private fun refreshRecyclerSongs(){
+    //Refresh when the list of songs change
+    private fun refreshRecyclerSongs() {
         adapter.clear()
         SongsMap.values.forEach {
             adapter.add(SongRow(it))
@@ -144,16 +151,16 @@ class MusicFragment : Fragment() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/songList/$uid")
 
-        ref.addChildEventListener(object:ChildEventListener{
+        ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val Song=snapshot.getValue(Song::class.java)?:return
-                SongsMap[snapshot.key!!]=Song
+                val Song = snapshot.getValue(Song::class.java) ?: return
+                SongsMap[snapshot.key!!] = Song
                 refreshRecyclerSongs()
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                val Song=snapshot.getValue(Song::class.java)?:return
-                SongsMap[snapshot.key!!]=Song
+                val Song = snapshot.getValue(Song::class.java) ?: return
+                SongsMap[snapshot.key!!] = Song
                 refreshRecyclerSongs()
             }
 

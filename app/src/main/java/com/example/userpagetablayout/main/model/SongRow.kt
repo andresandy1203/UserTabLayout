@@ -20,7 +20,8 @@ class SongRow(val songItem: Song) : Item<GroupieViewHolder>() {
         viewHolder.itemView.artistname_textview.text = songItem.songArtist
         viewHolder.itemView.songname_textView.text = songItem.songName
 
-        Glide.with(viewHolder.itemView.context).load(songItem.albumUrl).into(viewHolder.itemView.imageView_album)
+        Glide.with(viewHolder.itemView.context).load(songItem.albumUrl)
+            .into(viewHolder.itemView.imageView_album)
 
     }
 

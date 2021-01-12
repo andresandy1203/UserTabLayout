@@ -27,8 +27,9 @@ class VideosFragment : Fragment() {
 
     //Set up adapter
     val adapter = GroupAdapter<GroupieViewHolder>()
+
     //HashMap for the recycler view of video images
-    val videosMap=HashMap<String, Video>()
+    val videosMap = HashMap<String, Video>()
 
     @SuppressLint()
     override fun onCreateView(
@@ -53,17 +54,18 @@ class VideosFragment : Fragment() {
         //Click long listener for the recycler view items
         adapter.setOnItemLongClickListener { item, view ->
             //Create the Popup menu with the option to delete the video
-            val videoItem =item as VideoGalleryItem
-            val popupMenu=PopupMenu(activity,view)
+            val videoItem = item as VideoGalleryItem
+            val popupMenu = PopupMenu(activity, view)
             popupMenu.inflate(R.menu.deletemenu)
-            popupMenu.setOnMenuItemClickListener { item->
-                when(item.itemId){
-                R.id.deleteOption-> removeVideo(videoItem?.videoItem)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.deleteOption -> removeVideo(videoItem?.videoItem)
                 }
                 true
             }
             popupMenu.show()
-            true  }
+            true
+        }
 
         //Click listener for the recycler view items
         adapter.setOnItemClickListener { item, view ->
@@ -83,16 +85,16 @@ class VideosFragment : Fragment() {
 
     }
 
-    fun removeVideo(video: Video){
+    fun removeVideo(video: Video) {
         val uid = FirebaseAuth.getInstance().uid
-        val ref= FirebaseDatabase.getInstance().getReference("videoList/$uid/${video?.id}")
+        val ref = FirebaseDatabase.getInstance().getReference("videoList/$uid/${video?.id}")
         ref.removeValue()
         Toast.makeText(activity, "VideoDeleted", Toast.LENGTH_SHORT).show()
         videosMap.values.remove(video)
         refreshRecyclerViewVideo()
     }
 
-    private fun refreshRecyclerViewVideo(){
+    private fun refreshRecyclerViewVideo() {
         adapter.clear()
         videosMap.values.forEach {
             adapter.add(VideoGalleryItem(it))
@@ -104,17 +106,17 @@ class VideosFragment : Fragment() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/videoList/$uid")
 
-        ref.addChildEventListener(object :ChildEventListener{
+        ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val video=snapshot.getValue(Video::class.java)?:return
-                videosMap[snapshot.key!!]=video
+                val video = snapshot.getValue(Video::class.java) ?: return
+                videosMap[snapshot.key!!] = video
                 refreshRecyclerViewVideo()
 
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                val video=snapshot.getValue(Video::class.java)?:return
-                videosMap[snapshot.key!!]=video
+                val video = snapshot.getValue(Video::class.java) ?: return
+                videosMap[snapshot.key!!] = video
                 refreshRecyclerViewVideo()
             }
 
