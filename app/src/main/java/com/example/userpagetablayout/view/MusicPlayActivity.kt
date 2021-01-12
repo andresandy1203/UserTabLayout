@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.userpagetablayout.R
 import com.example.userpagetablayout.databinding.ActivityMusicPlayBinding
-import com.example.userpagetablayout.adapter.fragments.MusicFragment
+import com.example.userpagetablayout.view.fragments.MusicFragment
 import com.example.userpagetablayout.model.Song
 
 class MusicPlayActivity : AppCompatActivity() {

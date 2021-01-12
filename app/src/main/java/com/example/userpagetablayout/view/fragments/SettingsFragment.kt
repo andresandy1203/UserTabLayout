@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.adapter.fragments
+package com.example.userpagetablayout.view.fragments
 
 import android.app.Activity
 import android.content.Intent

@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
 import com.example.userpagetablayout.databinding.ActivityZoomedImageBinding
-import com.example.userpagetablayout.adapter.fragments.PhotosFragment
+import com.example.userpagetablayout.view.fragments.PhotosFragment
 import com.example.userpagetablayout.model.GalleryImage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
