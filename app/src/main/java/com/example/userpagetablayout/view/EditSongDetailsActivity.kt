@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.main
+package com.example.userpagetablayout.view
 
 import android.app.Activity
 import android.content.Context
@@ -13,9 +13,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.SplashActivity
 import com.example.userpagetablayout.databinding.ActivityEditSongDetailsBinding
-import com.example.userpagetablayout.main.view.MusicFragment
+import com.example.userpagetablayout.adapter.fragments.MusicFragment
 import com.example.userpagetablayout.model.Song
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase

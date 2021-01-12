@@ -13,24 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.YoutubeSearchActivity"></activity>
+        <activity android:name="com.example.userpagetablayout.view.YoutubeSearchActivity"></activity>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" />
-        <activity android:name=".main.EditSongDetailsActivity" />
-        <activity android:name=".main.VideoPlayActivity" />
-        <activity android:name=".main.ZoomedImageActivity" />
-        <activity android:name=".main.MusicPlayActivity" />
-        <activity android:name=".main.UserPageActivity">
+        <activity android:name="com.example.userpagetablayout.view.EditSongDetailsActivity" />
+        <activity android:name="com.example.userpagetablayout.view.VideoPlayActivity" />
+        <activity android:name="com.example.userpagetablayout.view.ZoomedImageActivity" />
+        <activity android:name="com.example.userpagetablayout.view.MusicPlayActivity" />
+        <activity android:name="com.example.userpagetablayout.view.UserPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity" />
+        <activity android:name="com.example.userpagetablayout.view.SplashActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.userpagetablayout.view.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.userpagetablayout.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

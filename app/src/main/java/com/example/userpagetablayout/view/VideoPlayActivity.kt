@@ -1,11 +1,11 @@
-package com.example.userpagetablayout.main
+package com.example.userpagetablayout.view
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.userpagetablayout.R
 import com.example.userpagetablayout.databinding.ActivityVideoPlayBinding
-import com.example.userpagetablayout.main.view.VideosFragment
+import com.example.userpagetablayout.adapter.fragments.VideosFragment
 import com.example.userpagetablayout.model.Video
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult

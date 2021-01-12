@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.main.view
+package com.example.userpagetablayout.adapter.fragments
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,10 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.main.EditSongDetailsActivity
-import com.example.userpagetablayout.main.MusicPlayActivity
+import com.example.userpagetablayout.view.EditSongDetailsActivity
+import com.example.userpagetablayout.view.MusicPlayActivity
 import com.example.userpagetablayout.databinding.FragmentMusicBinding
-import com.example.userpagetablayout.main.model.SongRow
+import com.example.userpagetablayout.model.SongRow
 import com.example.userpagetablayout.util.SwipeHelper
 
 import com.example.userpagetablayout.model.Song

@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.main.view
+package com.example.userpagetablayout.adapter.fragments
 
 import android.app.Activity
 import android.content.Context
@@ -16,14 +16,13 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.main.UserPageActivity
+import com.example.userpagetablayout.view.UserPageActivity
 import com.example.userpagetablayout.databinding.FragmentAddNewSongBinding
 import com.example.userpagetablayout.model.Song
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
 import java.util.*
 
 class AddNewSongFragment : Fragment() {

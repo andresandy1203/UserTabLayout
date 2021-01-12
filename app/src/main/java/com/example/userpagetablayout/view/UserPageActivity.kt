@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.main
+package com.example.userpagetablayout.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,6 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.SplashActivity
 import com.example.userpagetablayout.databinding.ActivityUserPageBinding
 import com.example.userpagetablayout.model.User
 import com.google.firebase.auth.ktx.auth

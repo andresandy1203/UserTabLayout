@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.main.view
+package com.example.userpagetablayout.adapter.fragments
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.main.VideoPlayActivity
+import com.example.userpagetablayout.view.VideoPlayActivity
 import com.example.userpagetablayout.databinding.FragmentVideosBinding
-import com.example.userpagetablayout.main.model.VideoGalleryItem
+import com.example.userpagetablayout.model.VideoGalleryItem
 import com.example.userpagetablayout.model.Video
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*

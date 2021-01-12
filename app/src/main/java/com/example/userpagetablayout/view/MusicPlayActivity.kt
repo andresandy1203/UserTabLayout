@@ -1,11 +1,11 @@
-package com.example.userpagetablayout.main
+package com.example.userpagetablayout.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.userpagetablayout.R
 import com.example.userpagetablayout.databinding.ActivityMusicPlayBinding
-import com.example.userpagetablayout.main.view.MusicFragment
+import com.example.userpagetablayout.adapter.fragments.MusicFragment
 import com.example.userpagetablayout.model.Song
 
 class MusicPlayActivity : AppCompatActivity() {

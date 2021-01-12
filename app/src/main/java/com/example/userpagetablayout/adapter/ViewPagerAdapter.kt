@@ -1,9 +1,7 @@
-package com.example.userpagetablayout.main.adapter
+package com.example.userpagetablayout.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.adapter.FragmentViewHolder
 
 
 class ViewPagerAdapter(fragment: Fragment) :

@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.EditSongDetailsActivity">
+        tools:context=".view.EditSongDetailsActivity">
 
         <ImageView
             android:id="@+id/selected_photo_imageview"

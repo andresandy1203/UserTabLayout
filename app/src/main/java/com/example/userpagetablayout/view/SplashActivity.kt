@@ -1,4 +1,4 @@
-package com.example.userpagetablayout
+package com.example.userpagetablayout.view
 
 import android.app.Activity
 import android.content.Context
@@ -12,9 +12,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.example.userpagetablayout.R
 import com.example.userpagetablayout.databinding.ActivityRegisterBinding
-import com.example.userpagetablayout.main.UserPageActivity
-import com.example.userpagetablayout.main.view.SettingsFragment
 import com.example.userpagetablayout.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase

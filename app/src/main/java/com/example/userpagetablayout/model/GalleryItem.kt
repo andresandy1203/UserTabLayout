@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.main.model
+package com.example.userpagetablayout.model
 
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R

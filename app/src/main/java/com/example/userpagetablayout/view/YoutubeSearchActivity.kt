@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.main
+package com.example.userpagetablayout.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,13 +15,7 @@ import com.example.userpagetablayout.databinding.ActivityYoutubeSearchBinding
 import com.example.userpagetablayout.model.Video
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import kotlinx.android.synthetic.main.activity_music_play.*
-import kotlinx.android.synthetic.main.activity_youtube_search.*
-import java.util.*
 
 class YoutubeSearchActivity : AppCompatActivity() {
 

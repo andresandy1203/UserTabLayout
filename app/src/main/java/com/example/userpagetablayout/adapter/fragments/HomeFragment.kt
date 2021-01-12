@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.main.view
+package com.example.userpagetablayout.adapter.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -12,10 +12,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.SplashActivity
 import com.example.userpagetablayout.databinding.FragmentHomeBinding
-import com.example.userpagetablayout.main.YoutubeSearchActivity
-import com.example.userpagetablayout.main.adapter.ViewPagerAdapter
+import com.example.userpagetablayout.view.YoutubeSearchActivity
+import com.example.userpagetablayout.adapter.ViewPagerAdapter
 import com.example.userpagetablayout.model.GalleryImage
 import com.example.userpagetablayout.model.User
 import com.google.android.material.tabs.TabLayoutMediator

@@ -1,4 +1,4 @@
-package com.example.userpagetablayout.main.view
+package com.example.userpagetablayout.adapter.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.userpagetablayout.R
-import com.example.userpagetablayout.SplashActivity
+import com.example.userpagetablayout.view.SplashActivity
 import com.example.userpagetablayout.databinding.FragmentSettingsBinding
-import com.example.userpagetablayout.main.UserPageActivity
+import com.example.userpagetablayout.view.UserPageActivity
 import com.example.userpagetablayout.model.User
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth

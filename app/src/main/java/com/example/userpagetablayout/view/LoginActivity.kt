@@ -1,4 +1,4 @@
-package com.example.userpagetablayout
+package com.example.userpagetablayout.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.example.userpagetablayout.R
 
 import com.example.userpagetablayout.databinding.ActivityLoginBinding
-import com.example.userpagetablayout.main.UserPageActivity
-import com.example.userpagetablayout.model.User
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
