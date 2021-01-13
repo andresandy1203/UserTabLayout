@@ -49,3 +49,6 @@ In order to save the changes the user must reauthenticate by entering the curren
 A new user can be registered, with and emai, password, username and a selected and cropped picture.
 
 ![](registerUser.gif)
+
+
+*Remember to add your own Firebase & Youtube Player Androir API credentials when you test the app
