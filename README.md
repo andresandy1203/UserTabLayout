@@ -4,6 +4,7 @@ Registered users have a user page where they can add lists of their favorite son
 
 ## TabLayout material for easy navigation
 Using TabLayout material together with ViewPagerAdapter the app can quickly navigate between fragments.
+
 ![](tabLayout.gif)
 
 ## Songs List
