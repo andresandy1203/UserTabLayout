@@ -13,6 +13,7 @@ When you click on the song a webView with a YoutubeMusic search for the song nam
 Using the floating button you can add a new song. This will display a new fragment where you can select and crop a picture you want to assign, plus the name and artist of the song.
 
 ![](addNewSong.gif)
+
 When you swipe on the song item you can edit the song.
 Or you can choose to delete it
 
