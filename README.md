@@ -51,4 +51,4 @@ A new user can be registered, with and emai, password, username and a selected a
 ![](gifs/registerUser.gif)
 
 
-*Remember to add your own Firebase & Youtube Android Player API credentials when you test the app
+* Remember to add your own Firebase & Youtube Android Player API credentials when you test the app
