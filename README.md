@@ -10,10 +10,10 @@ Using TabLayout material together with ViewPagerAdapter the app can quickly navi
 In a recycler view the songs picture, name and artist are displayed. 
 When you click on the song a webView with a YoutubeMusic search for the song name and artist is inflated on a new activiy.
 Using the floating button you can add a new song. This will display a new fragment where you can select and crop a picture you want to assign, plus the name and artist of the song.
-![](addNewSong.gif)
+
+![](addNewSong.gif)![](edit&DeleteSong.gif)
 When you swipe on the song item you can edit the song.
 Or you can choose to delete it
-![](edit&DeleteSong.gif)
 
 ## Photos List
 In a recycler view with a grid layout the list of photos is displayed.
@@ -28,6 +28,7 @@ When you click on the video the video is played inside a webview using YouTube A
 Video can be deleted by long clicking on the video's image.
 You can add a new video by clicking the floating button, this will activate a Youtube search on a new webview.
 When a video is played it can be added to your list by clicking the save video at the button of the view. 
+
 ![](videosList.gif)
 This is made possible by using a pattern recognition algorithm that looks for the video ID inside the current url being displayed.
 It also finds and uploads the video's thumbnail.
