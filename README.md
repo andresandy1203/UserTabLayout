@@ -35,21 +35,20 @@ Using the floating button you can add a new picture too, either taking a new one
 
             when (position) {
                 0 -> {
+                    //Music Fragment
                     val navController = activity?.findNavController(R.id.myNavHostFragment)
                     navController?.navigate(R.id.action_homeFragment_to_add_new_song)
-
-                    Log.d(TAG, "we at music")
                 }
 
                 1 -> {
+                    //Photos Fragment
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
                     startActivityForResult(intent, 0)
-                    Log.d(TAG, "we at photos")
                 }
 
                 2 -> {
-                    Log.d(TAG, "we at videos")
+                    //Videos Fragment
                     val intent1 = Intent(activity, YoutubeSearchActivity::class.java)
                     startActivity(intent1)
                 }
