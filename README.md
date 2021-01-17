@@ -137,7 +137,7 @@ navigationVersion="2.3.0"
 multidex_version = "2.0.1"
 
 
-Gradle dependecies
+### Gradle dependecies
 ```
 implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
