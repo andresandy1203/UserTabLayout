@@ -107,22 +107,35 @@ A new user can be registered, with and email, password, username and a selected 
 
 ## Credits
 [Firebase analytics 17.5.0, auth 19.4.0, storage 19.2.0, database 19.4.0](https://firebase.google.com/docs/android/setup)
+
 [Circle Image View 3.1.0](https://github.com/hdodenhof/CircleImageView)
+
 [Groupie 2.8.1](https://github.com/lisawray/groupie)
+
 [Glide 4.11.0](https://github.com/bumptech/glide)
+
 [Glide 4.11.0](https://github.com/bumptech/glide)
+
 [Image cropper 2.8.+](https://github.com/ArthurHub/Android-Image-Cropper)
 
 Android Gradle plugin version: 4.0.2
+
 Gradle version: 6.1.1
+
 
 com.google.gms:google-services:4.3.3
 
+
 buildToolsVersion "30.0.1"
+
 ext.kotlin_version = "1.4.10"
+
 supportlibVersion = '1.2.0'
+
 navigationVersion="2.3.0"
+
 multidex_version = "2.0.1"
+
 
 Gradle dependecies
 ```
