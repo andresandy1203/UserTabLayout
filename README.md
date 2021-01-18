@@ -103,7 +103,7 @@ A new user can be registered, with and email, password, username and a selected 
 ![](gifs/registerUser.gif)
 
 
-* Remember to add your own Firebase & Youtube Android Player API credentials when you test the app
+* Remember to add your own Firebase & Youtube Android Player API credentials when you test the app, add your own google-services.json
 
 ## Credits
 [Firebase analytics 17.5.0, auth 19.4.0, storage 19.2.0, database 19.4.0](https://firebase.google.com/docs/android/setup)
@@ -111,8 +111,6 @@ A new user can be registered, with and email, password, username and a selected 
 [Circle Image View 3.1.0](https://github.com/hdodenhof/CircleImageView)
 
 [Groupie 2.8.1](https://github.com/lisawray/groupie)
-
-[Glide 4.11.0](https://github.com/bumptech/glide)
 
 [Glide 4.11.0](https://github.com/bumptech/glide)
 
